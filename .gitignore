@@ -1,0 +1,19 @@
+# CMake build directories
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Qt Creator files
+*.pro.user
+*.autosave
+*.user*
+
+# Compiled binaries
+*.exe
+*.o
+*.obj
+
+# SQLite DB if generated at runtime
+*.db
