@@ -15,6 +15,8 @@ add_executable(MyQtApp
         database.h
         mainwindow.cpp
         mainwindow.h
+        rent.cpp
+        rent.h
 )
 
 target_link_libraries(MyQtApp
