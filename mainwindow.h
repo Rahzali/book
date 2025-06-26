@@ -49,4 +49,4 @@ private:
     void refreshUserList();
     void refreshAvailableBooks();
 };
-#endif // MAINWINDOW_H
+#endif

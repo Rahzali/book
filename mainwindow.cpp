@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug() << "Database connected.";
     }
 
-    // Hide all views and rent/return panel by default
     ui->userList->hide();
     ui->userEdit->hide();
     ui->bookList->hide();
@@ -161,7 +160,7 @@ void MainWindow::showRentals()
     ui->bookEdit->hide();
 
     ui->manageButton->show();
-    hideManagePanel(); // Hide rent/return controls initially
+    hideManagePanel();
 }
 
 void MainWindow::filterUsers(const QString &text)

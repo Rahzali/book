@@ -16,7 +16,6 @@ bool Database::connect()
 
     QSqlQuery query;
 
-    // --- Create Tables ---
     query.exec(R"(
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -53,7 +52,7 @@ void Database::seedTestData()
 {
     QSqlQuery query;
 
-    // --- Seed Users ---
+
     query.exec("SELECT COUNT(*) FROM users");
     if (query.next() && query.value(0).toInt() == 0) {
         query.exec("INSERT INTO users (name) VALUES ('Alice')");
@@ -61,7 +60,7 @@ void Database::seedTestData()
         query.exec("INSERT INTO users (name) VALUES ('Charlie')");
     }
 
-    // --- Seed Books ---
+
     query.exec("SELECT COUNT(*) FROM books");
     if (query.next() && query.value(0).toInt() == 0) {
         query.exec("INSERT INTO books (title, author) VALUES ('1984', 'George Orwell')");
@@ -71,16 +70,12 @@ void Database::seedTestData()
         query.exec("INSERT INTO books (title, author) VALUES ('The Hobbit', 'J.R.R. Tolkien')");
     }
 
-    // --- Seed Rentals ---
     query.exec("SELECT COUNT(*) FROM rentals");
     if (query.next() && query.value(0).toInt() == 0) {
-        // Alice rents '1984' (id = 1)
         query.exec("INSERT INTO rentals (user_id, book_id) VALUES (1, 1)");
 
-        // Bob rents 'Brave New World' (id = 2)
         query.exec("INSERT INTO rentals (user_id, book_id) VALUES (2, 2)");
 
-        // Charlie rented and returned 'Fahrenheit 451' (id = 3)
         query.exec("INSERT INTO rentals (user_id, book_id, return_date) VALUES (3, 3, DATE('now', '-10 days'))");
     }
 }

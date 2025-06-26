@@ -20,4 +20,4 @@ private:
     QString bookFilter;
 };
 
-#endif // RENT_H
+#endif
