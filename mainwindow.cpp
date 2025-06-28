@@ -201,7 +201,6 @@ void MainWindow::showRentals()
     ui->rentTable->setModel(rentalsProxy);
     ui->rentTable->resizeColumnsToContents();
 
-    // Show everything related to rentals
     ui->rentTable->show();
     ui->userEdit2->show();
     ui->bookEdit2->show();
@@ -214,9 +213,9 @@ void MainWindow::showRentals()
     ui->returnBookCombo->show();
     ui->returnButton->show();
 
-    loadRentForm();  // refresh combos
+    loadRentForm();
 
-    // Hide unrelated sections
+
     ui->userList->hide();
     ui->userEdit->hide();
     ui->bookList->hide();
@@ -370,7 +369,7 @@ void MainWindow::addUser()
         qDebug() << "Failed to add user:" << query.lastError().text();
     } else {
         ui->addUserEdit->clear();
-        showUsers();  // Refresh list
+        showUsers();
     }
 }
 void MainWindow::addBook()
@@ -386,7 +385,7 @@ void MainWindow::addBook()
         qDebug() << "Failed to add book:" << query.lastError().text();
     } else {
         ui->addBookEdit->clear();
-        showBooks();  // Refresh list
+        showBooks();
     }
 }
 void MainWindow::refreshRentalsTable()
@@ -424,7 +423,7 @@ void MainWindow::removeUser()
     if (!query.exec()) {
         qDebug() << "Failed to remove user:" << query.lastError().text();
     } else {
-        showUsers(); // refresh list and combo
+        showUsers();
     }
 }
 
@@ -440,7 +439,7 @@ void MainWindow::removeBook()
     if (!query.exec()) {
         qDebug() << "Failed to remove book:" << query.lastError().text();
     } else {
-        showBooks(); // refresh list and combo
+        showBooks();
     }
 }
 
