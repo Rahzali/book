@@ -30,8 +30,13 @@ private slots:
     void rentBook();
     void returnSelectedRental();
     void updateReturnBooksForUser();
-    void showManagePanel();
-    void hideManagePanel();
+    void addUser();
+    void addBook();
+    void refreshRentalsTable();
+    void removeUser();
+    void removeBook();
+
+
 
 
 
