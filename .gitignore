@@ -1,9 +1,10 @@
 # CMake build directories
-/build/
-/CMakeFiles/
-/CMakeCache.txt
+build/
+CMakeFiles/
+CMakeCache.txt
 cmake_install.cmake
 Makefile
+.idea/
 
 # Qt Creator files
 *.pro.user
