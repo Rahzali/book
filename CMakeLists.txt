@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(MyQtApp LANGUAGES CXX)
+project(Book LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -10,7 +10,7 @@ find_package(Qt6 6.8.3 REQUIRED COMPONENTS Core Gui Widgets Sql)
 
 qt_standard_project_setup()
 
-qt_add_executable(MyQtApp
+qt_add_executable(${PROJECT_NAME}
         main.cpp
         mainwindow.ui
         database.cpp
@@ -21,7 +21,7 @@ qt_add_executable(MyQtApp
         rent.h
 )
 
-target_link_libraries(MyQtApp
+target_link_libraries(${PROJECT_NAME}
         PRIVATE
         Qt6::Core
         Qt6::Gui
