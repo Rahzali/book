@@ -29,14 +29,7 @@ target_link_libraries(${PROJECT_NAME}
         Qt6::Sql
 )
 
-if(APPLE)
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-            MACOSX_BUNDLE_GUI_IDENTIFIER com.zofikar.mushromapp
-            MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-            MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-            MACOSX_BUNDLE TRUE
-    )
-elseif (WIN32)
+if (WIN32)
     set_target_properties(${PROJECT_NAME} PROPERTIES
             WIN32_EXECUTABLE TRUE
     )
