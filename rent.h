@@ -13,7 +13,7 @@ public:
     void setBookFilter(const QString &text) { bookFilter = text; invalidateFilter(); }
 
 protected:
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    [[nodiscard]] bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
 private:
     QString userFilter;
