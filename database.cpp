@@ -76,7 +76,6 @@ CREATE TABLE IF NOT EXISTS favourites
     FOREIGN KEY(user_id) REFERENCES users (id),
     FOREIGN KEY(book_id) REFERENCES books (id),
     PRIMARY KEY (user_id, book_id)
-);
 ))");
 
     // AUTHORS_BOOKS_JOIN_TABLE
@@ -107,46 +106,54 @@ CREATE TABLE IF NOT EXISTS genres_books_join_table (
 void Database::seedTestData()
 {
     QSqlQuery query;
-    QVariant userId1, userId2, userId3;
-    QVariant authorId1, authorId2, authorId3, authorId4, authorId5;
-    QVariant genreId1, genreId2, genreId3;
-    QVariant bookId1, bookId2, bookId3, bookId4, bookId5;
+    int userId1 = -1, userId2 = -1, userId3 = -1;
+    int authorId1 = -1, authorId2 = -1, authorId3 = -1, authorId4 = -1, authorId5 = -1;
+    int genreId1 = -1, genreId2 = -1, genreId3 = -1;
+    int bookId1 = -1, bookId2 = -1, bookId3 = -1, bookId4 = -1, bookId5 = -1;
 
     // USERS
     query.exec("SELECT COUNT(*) FROM users");
     if (query.next() && query.value(0).toInt() == 0) {
         query.exec("INSERT INTO users (name) VALUES ('Alice')");
-        userId1 = query.lastInsertId();
+        userId1 = query.lastInsertId().toInt();
+
         query.exec("INSERT INTO users (name) VALUES ('Bob')");
-        userId2 = query.lastInsertId();
+        userId2 = query.lastInsertId().toInt();
+
         query.exec("INSERT INTO users (name) VALUES ('Charlie')");
-        userId3 = query.lastInsertId();
+        userId3 = query.lastInsertId().toInt();
     }
 
     // AUTHORS
     query.exec("SELECT COUNT(*) FROM authors");
     if (query.next() && query.value(0).toInt() == 0) {
         query.exec("INSERT INTO authors (name) VALUES ('George Orwell')");
-        authorId1 = query.lastInsertId();
+        authorId1 = query.lastInsertId().toInt();
+
         query.exec("INSERT INTO authors (name) VALUES ('Aldous Huxley')");
-        authorId2 = query.lastInsertId();
+        authorId2 = query.lastInsertId().toInt();
+
         query.exec("INSERT INTO authors (name) VALUES ('Ray Bradbury')");
-        authorId3 = query.lastInsertId();
+        authorId3 = query.lastInsertId().toInt();
+
         query.exec("INSERT INTO authors (name) VALUES ('Harper Lee')");
-        authorId4 = query.lastInsertId();
+        authorId4 = query.lastInsertId().toInt();
+
         query.exec("INSERT INTO authors (name) VALUES ('J.R.R. Tolkien')");
-        authorId5 = query.lastInsertId();
+        authorId5 = query.lastInsertId().toInt();
     }
 
     // GENRES
     query.exec("SELECT COUNT(*) FROM genres");
     if (query.next() && query.value(0).toInt() == 0) {
         query.exec("INSERT INTO genres (name) VALUES ('Dystopian')");
-        genreId1 = query.lastInsertId();
+        genreId1 = query.lastInsertId().toInt();
+
         query.exec("INSERT INTO genres (name) VALUES ('Fantasy')");
-        genreId2 = query.lastInsertId();
+        genreId2 = query.lastInsertId().toInt();
+
         query.exec("INSERT INTO genres (name) VALUES ('Classic')");
-        genreId3 = query.lastInsertId();
+        genreId3 = query.lastInsertId().toInt();
     }
 
     // BOOKS & JOINS
@@ -154,7 +161,7 @@ void Database::seedTestData()
     if (query.next() && query.value(0).toInt() == 0) {
         // 1984
         query.exec("INSERT INTO books (title) VALUES ('1984')");
-        bookId1 = query.lastInsertId();
+        bookId1 = query.lastInsertId().toInt();
         query.prepare("INSERT INTO authors_books_join_table (authors_id, book_id) VALUES (?, ?)");
         query.addBindValue(authorId1);
         query.addBindValue(bookId1);
@@ -166,7 +173,7 @@ void Database::seedTestData()
 
         // Brave New World
         query.exec("INSERT INTO books (title) VALUES ('Brave New World')");
-        bookId2 = query.lastInsertId();
+        bookId2 = query.lastInsertId().toInt();
         query.prepare("INSERT INTO authors_books_join_table (authors_id, book_id) VALUES (?, ?)");
         query.addBindValue(authorId2);
         query.addBindValue(bookId2);
@@ -178,7 +185,7 @@ void Database::seedTestData()
 
         // Fahrenheit 451
         query.exec("INSERT INTO books (title) VALUES ('Fahrenheit 451')");
-        bookId3 = query.lastInsertId();
+        bookId3 = query.lastInsertId().toInt();
         query.prepare("INSERT INTO authors_books_join_table (authors_id, book_id) VALUES (?, ?)");
         query.addBindValue(authorId3);
         query.addBindValue(bookId3);
@@ -190,7 +197,7 @@ void Database::seedTestData()
 
         // To Kill a Mockingbird
         query.exec("INSERT INTO books (title) VALUES ('To Kill a Mockingbird')");
-        bookId4 = query.lastInsertId();
+        bookId4 = query.lastInsertId().toInt();
         query.prepare("INSERT INTO authors_books_join_table (authors_id, book_id) VALUES (?, ?)");
         query.addBindValue(authorId4);
         query.addBindValue(bookId4);
@@ -202,7 +209,7 @@ void Database::seedTestData()
 
         // The Hobbit
         query.exec("INSERT INTO books (title) VALUES ('The Hobbit')");
-        bookId5 = query.lastInsertId();
+        bookId5 = query.lastInsertId().toInt();
         query.prepare("INSERT INTO authors_books_join_table (authors_id, book_id) VALUES (?, ?)");
         query.addBindValue(authorId5);
         query.addBindValue(bookId5);
@@ -230,6 +237,15 @@ void Database::seedTestData()
             "INSERT INTO rentals (user_id, book_id, rent_date, return_date) VALUES (?, ?, DATE('now', '-15 days'), DATE('now', '-10 days'))");
         query.addBindValue(userId3);
         query.addBindValue(bookId3);
+        query.exec();
+    }
+
+    // FAVOURITES
+    query.exec("SELECT COUNT(*) FROM favourites");
+    if (query.next() && query.value(0).toInt() == 0) {
+        query.prepare("INSERT INTO favourites (user_id, book_id) VALUES (?, ?)");
+        query.addBindValue(userId1);
+        query.addBindValue(bookId1);
         query.exec();
     }
 }
