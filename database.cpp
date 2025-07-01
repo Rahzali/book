@@ -67,6 +67,18 @@ CREATE TABLE IF NOT EXISTS rentals (
     FOREIGN KEY(book_id) REFERENCES books(id)
 ))");
 
+    // FAVOURITES
+    query.exec(R"(
+CREATE TABLE IF NOT EXISTS favourites
+(
+    user_id INTEGER NOT NULL,
+    book_id INTEGER NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users (id),
+    FOREIGN KEY(book_id) REFERENCES books (id),
+    PRIMARY KEY (user_id, book_id)
+);
+))");
+
     // AUTHORS_BOOKS_JOIN_TABLE
     query.exec(R"(
 CREATE TABLE IF NOT EXISTS authors_books_join_table (
