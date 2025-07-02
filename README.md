@@ -26,3 +26,7 @@ Run:
 ```cmd
 Book.exe
 ```
+
+## ERD
+
+![Database ERD](./ERD.png)
